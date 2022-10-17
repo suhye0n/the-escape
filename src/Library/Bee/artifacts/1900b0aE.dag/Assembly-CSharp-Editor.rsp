@@ -115,7 +115,12 @@
 -define:ENABLE_TERRAIN
 -define:ENABLE_TILEMAP
 -define:ENABLE_TIMELINE
+-define:ENABLE_INPUT_SYSTEM
 -define:ENABLE_LEGACY_INPUT_MANAGER
+-define:CROSS_PLATFORM_INPUT
+-define:UNITY_POST_PROCESSING_STACK_V2
+-define:ODIN_INSPECTOR
+-define:ODIN_INSPECTOR_3
 -define:PHOTON_UNITY_NETWORKING
 -define:PUN_2_0_OR_NEWER
 -define:PUN_2_OR_NEWER
@@ -334,6 +339,14 @@
 -r:"C:/Program Files/Unity/Hub/Editor/2021.3.10f1/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/System.Transactions.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2021.3.10f1/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/System.Xml.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2021.3.10f1/Editor/Data/UnityReferenceAssemblies/unity-4.8-api/System.Xml.Linq.dll"
+-r:"C:/Users/clap_/OneDrive/Documents/GitHub/OpenSourceGroup1/src/Library/PackageCache/com.unity.analytics@3.6.12/AnalyticsStandardEvents/Unity.Analytics.StandardEvents.dll"
+-r:"C:/Users/clap_/OneDrive/Documents/GitHub/OpenSourceGroup1/src/Library/PackageCache/com.unity.analytics@3.6.12/Unity.Analytics.Editor.dll"
+-r:"C:/Users/clap_/OneDrive/Documents/GitHub/OpenSourceGroup1/src/Library/PackageCache/com.unity.analytics@3.6.12/Unity.Analytics.Tracker.dll"
+-r:"C:/Users/clap_/OneDrive/Documents/GitHub/OpenSourceGroup1/src/Library/PackageCache/com.unity.burst@1.6.6/Unity.Burst.CodeGen/Unity.Burst.Cecil.dll"
+-r:"C:/Users/clap_/OneDrive/Documents/GitHub/OpenSourceGroup1/src/Library/PackageCache/com.unity.burst@1.6.6/Unity.Burst.CodeGen/Unity.Burst.Cecil.Mdb.dll"
+-r:"C:/Users/clap_/OneDrive/Documents/GitHub/OpenSourceGroup1/src/Library/PackageCache/com.unity.burst@1.6.6/Unity.Burst.CodeGen/Unity.Burst.Cecil.Pdb.dll"
+-r:"C:/Users/clap_/OneDrive/Documents/GitHub/OpenSourceGroup1/src/Library/PackageCache/com.unity.burst@1.6.6/Unity.Burst.CodeGen/Unity.Burst.Cecil.Rocks.dll"
+-r:"C:/Users/clap_/OneDrive/Documents/GitHub/OpenSourceGroup1/src/Library/PackageCache/com.unity.burst@1.6.6/Unity.Burst.Unsafe.dll"
 -r:"C:/Users/clap_/OneDrive/Documents/GitHub/OpenSourceGroup1/src/Library/PackageCache/com.unity.collab-proxy@1.17.2/Lib/Editor/PlasticSCM/log4netPlastic.dll"
 -r:"C:/Users/clap_/OneDrive/Documents/GitHub/OpenSourceGroup1/src/Library/PackageCache/com.unity.collab-proxy@1.17.2/Lib/Editor/PlasticSCM/Unity.Plastic.Antlr3.Runtime.dll"
 -r:"C:/Users/clap_/OneDrive/Documents/GitHub/OpenSourceGroup1/src/Library/PackageCache/com.unity.collab-proxy@1.17.2/Lib/Editor/PlasticSCM/Unity.Plastic.Newtonsoft.Json.dll"
@@ -345,6 +358,7 @@
 -r:"C:/Users/clap_/OneDrive/Documents/GitHub/OpenSourceGroup1/src/Library/PackageCache/com.unity.visualscripting@1.7.8/Editor/VisualScripting.Core/Dependencies/YamlDotNet/Unity.VisualScripting.YamlDotNet.dll"
 -r:"C:/Users/clap_/OneDrive/Documents/GitHub/OpenSourceGroup1/src/Library/PackageCache/com.unity.visualscripting@1.7.8/Editor/VisualScripting.Core/EditorAssetResources/Unity.VisualScripting.TextureAssets.dll"
 -r:"C:/Users/clap_/OneDrive/Documents/GitHub/OpenSourceGroup1/src/Library/PackageCache/com.unity.visualscripting@1.7.8/Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Analytics.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/PhotonChat.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/PhotonRealtime.ref.dll"
@@ -356,9 +370,19 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/PhotonUnityNetworking.Utilities.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/PunDemos.DemoHubEditor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/PunDemos.DemoSlotcarEditor.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Unity.2D.Sprite.Editor.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Unity.2D.Tilemap.Editor.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Unity.Analytics.DataPrivacy.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Unity.Burst.Editor.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Unity.Burst.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.EditorCoroutines.Editor.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Unity.InputSystem.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Unity.Mathematics.Editor.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Unity.Mathematics.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.Performance.Profile-Analyzer.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.PlasticSCM.Editor.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Unity.Postprocessing.Editor.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Unity.Postprocessing.Runtime.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.Rider.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.Services.Core.Analytics.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.Services.Core.Environments.ref.dll"
