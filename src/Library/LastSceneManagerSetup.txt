@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Infima Games/Low Poly Shooter Pack - Free Sample/Scenes/New Scene.unity
+- path: Assets/Scenes/S_Lobby.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
