@@ -6,8 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/S_Content_Overview.unity
-    guid: 63fdc04a097eb0b4ba4af78a98dac40d
+    path: Assets/2. Scenes/S_Lobby.unity
+    guid: 0e850672229d0014d9e52398df84dcc3
+  - enabled: 1
+    path: Assets/2. Scenes/S_FPS_Game.unity
+    guid: b21dfcf6ff28d4f4289817f418b35210
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 9eb07e2d669e9c94e9d7d3c782a916f7,
       type: 2}
