@@ -395,7 +395,7 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.VSCode.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
-"Assets/FPS_Resources/Scripts/LobbyManager.cs"
+"Assets/FPS_Resources/Script/NewBehaviourScript.cs"
 "Assets/Infima Games/Low Poly Shooter Pack - Free Sample/Code/Animation/AnimationReceiver.cs"
 "Assets/Infima Games/Low Poly Shooter Pack - Free Sample/Code/Animation/CharacterAnimationEventHandler.cs"
 "Assets/Infima Games/Low Poly Shooter Pack - Free Sample/Code/Animation/PlaySoundBehaviour.cs"

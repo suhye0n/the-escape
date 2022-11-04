@@ -190,7 +190,11 @@ namespace Photon.Realtime
         DisconnectByOperationLimit,
 
         /// <summary>The client received a "Disconnect Message" from the server. Check the debug logs for details.</summary>
-        DisconnectByDisconnectMessage
+        DisconnectByDisconnectMessage,
+
+        /// <summary>Used in case the application quits. Can be useful to not load new scenes or re-connect in OnDisconnected.</summary>
+        /// <remarks>ConnectionHandler.OnDisable() will use this, if the Unity engine already called OnApplicationQuit (ConnectionHandler.AppQuits = true).</remarks>
+        ApplicationQuit
     }
 
     /// <summary>Available server (types) for internally used field: server.</summary>
@@ -1040,15 +1044,20 @@ namespace Photon.Realtime
         }
 
         /// <summary>
-        /// Connects you to a specific region's Master Server, using the Name Server to find the IP.
+        /// Connects you to a specific region's Master Server, using the Name Server to get the IP.
         /// </summary>
         /// <remarks>
         /// If the region is null or empty, no connection will be made.
         /// If the region (code) provided is not available, the connection process will fail on the Name Server.
-        /// This method connects only to the region defined. No "Best Region" pinging will be done.
+        /// This method connects only to the region defined. Any "Best Region" pinging should get done beforehand.
         ///
-        /// If the region string does not contain a "/", this means no specific cluster is requested.
-        /// To support "Sharding", the region gets a "/*" postfix in this case, to select a random cluster.
+        /// To support "sharding", a region string may contain a "/*" to pick a random cluster or "/clustername"
+        /// to connect to a specific cluster.
+        /// With a "/" or no cluster postfix, the client connects to the default cluster (a specific one
+        /// for a region).
+        ///
+        /// By default, the region string provided by the Name Server does not contain a cluster (and only the
+        /// default cluster is used).
         /// </remarks>
         /// <returns>If the operation could be sent. If false, no operation was sent.</returns>
         public bool ConnectToRegionMaster(string region)
@@ -1086,10 +1095,10 @@ namespace Photon.Realtime
 
             this.LoadBalancingPeer.Disconnect();
 
-            if (!string.IsNullOrEmpty(region) && !region.Contains("/"))
-            {
-                region = region + "/*";
-            }
+            //if (!string.IsNullOrEmpty(region) && !region.Contains("/"))
+            //{
+            //    region = region + "/*";
+            //}
             this.CloudRegion = region;
 
 
@@ -2624,7 +2633,7 @@ namespace Photon.Realtime
                     //this.DebugReturn(DebugLevel.ERROR, "Server returned secret. Created AuthValues.");
                 }
 
-                this.AuthValues.Token = operationResponse[ParameterCode.Token] as string;
+                this.AuthValues.Token = operationResponse.Parameters[ParameterCode.Token];
                 this.tokenCache = this.AuthValues.Token;
             }
 
@@ -3343,14 +3352,17 @@ namespace Photon.Realtime
                         this.AuthValues = new AuthenticationValues();
                     }
 
-                    this.AuthValues.Token = photonEvent[ParameterCode.Token] as string;
+                    this.AuthValues.Token = photonEvent[ParameterCode.Token];
                     this.tokenCache = this.AuthValues.Token;
                     break;
 
             }
 
             this.UpdateCallbackTargets();
-            if (this.EventReceived != null) this.EventReceived(photonEvent);
+            if (this.EventReceived != null)
+            {
+                this.EventReceived(photonEvent);
+            }
         }
 
         /// <summary>In Photon 4, "raw messages" will get their own callback method in the interface. Not used yet.</summary>
@@ -3721,6 +3733,16 @@ namespace Photon.Realtime
         /// <remarks>
         /// Each item is a RoomInfo which might include custom properties (provided you defined those as lobby-listed when creating a room).
         /// Not all types of lobbies provide a listing of rooms to the client. Some are silent and specialized for server-side matchmaking.
+        ///
+        /// The list is sorted using two criteria: open or closed, full or not. So the list is composed of three groups, in this order:
+        ///
+        /// first group: open and not full (joinable).</br>
+        /// second group: full but not closed (not joinable).</br>
+        /// third group: closed (not joinable, could be full or not).</br>
+        ///
+        /// In each group, entries do not have any particular order (random).
+        ///
+        /// The list of rooms (or rooms' updates) is also limited in number, see Lobby Limits.
         /// </remarks>
         void OnRoomListUpdate(List<RoomInfo> roomList);
 
@@ -3844,6 +3866,9 @@ namespace Photon.Realtime
         /// This wraps up multiple internal actions.
         ///
         /// Wait for the callback OnConnectedToMaster, before you use lobbies and join or create rooms.
+        ///
+        /// OnLeftRoom also gets called, when the application quits.
+        /// It makes sense to check static ConnectionHandler.AppQuits before loading scenes in OnLeftRoom().
         /// </remarks>
         void OnLeftRoom();
     }
