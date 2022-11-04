@@ -3,15 +3,6 @@ Photon C# Client Library - Changelog
 Exit Games GmbH - www.photonengine.com - forum.photonengine.com
 
 
-Version 4.1.6.17 (02. August 2022 - rev6472)
-    Changed: SequenceDeltaLimitResends to 100 and SequenceDeltaLimitSends to 75.
-
-Version 4.1.6.16 (20. June 2022)
-    Note: No notable changes.
-
-Version 4.1.6.15 (02. June 2022)
-    Note: No notable changes.
-
 Version 4.1.6.14 (26. April 2022 - rev6414)
     Fixed: WSS PhotonClientWebSocket blocking the main thread when sending isn't possible. Without loss. This affects the RTT however.
     Changed: PhotonClientWebSocket will return PhotonSocketError.Busy, if previous Task is not completed yet.

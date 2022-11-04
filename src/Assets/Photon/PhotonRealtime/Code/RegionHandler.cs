@@ -14,7 +14,7 @@
 #define SUPPORTED_UNITY
 #endif
 
-#if UNITY_WEBGL
+#if UNITY_WEBGL || UNITY_SWITCH
 #define PING_VIA_COROUTINE
 #endif
 
@@ -28,7 +28,6 @@ namespace Photon.Realtime
     using System.Collections.Generic;
     using System.Diagnostics;
     using ExitGames.Client.Photon;
-    using System.Linq;
 
     #if SUPPORTED_UNITY
     using UnityEngine;
@@ -51,11 +50,6 @@ namespace Photon.Realtime
     /// more regions get pinged.
     /// Not all regions will be pinged. As soon as the results are final, the client will connect to the best region,
     /// so you can check the ping results when connected to the Master Server.
-    /// 
-    /// Regions gets pinged 5 times (RegionPinger.Attempts).
-    /// Out of those, the worst rtt is discarded and the best will be counted two times for a weighted average.
-    /// 
-    /// Usually UDP will be used to ping the Master Servers. In WebGL, WSS is used instead.
     ///
     /// It makes sense to make clients "sticky" to a region when one gets selected.
     /// This can be achieved by storing the SummaryToCache value, once pinging was done.
@@ -341,6 +335,7 @@ namespace Photon.Realtime
     public class RegionPinger
     {
         public static int Attempts = 5;
+        public static bool IgnoreInitialAttempt = true;
         public static int MaxMilliseconsPerPing = 800; // enter a value you're sure some server can beat (have a lower rtt)
         public static int PingWhenFailed = Attempts * MaxMilliseconsPerPing;
 
@@ -441,7 +436,7 @@ namespace Photon.Realtime
             #if !NETFX_CORE
             try
             {
-                queued = ThreadPool.QueueUserWorkItem(o => this.RegionPingThreaded());
+                queued = ThreadPool.QueueUserWorkItem(this.RegionPingPooled);
             }
             catch
             {
@@ -457,13 +452,18 @@ namespace Photon.Realtime
 
             return true;
         }
-        
+
+        // wraps RegionPingThreaded() to get the signature compatible with ThreadPool.QueueUserWorkItem
+        protected internal void RegionPingPooled(object context)
+        {
+            this.RegionPingThreaded();
+        }
 
         protected internal bool RegionPingThreaded()
         {
             this.region.Ping = PingWhenFailed;
 
-            int rttSum = 0;
+            float rttSum = 0.0f;
             int replyCount = 0;
 
 
@@ -480,7 +480,7 @@ namespace Photon.Realtime
                 }
                 catch (Exception e)
                 {
-                    System.Diagnostics.Debug.WriteLine("RegionPinger.RegionPingThreaded() caught exception for ping.StartPing(). Exception: " + e + " Source: " + e.Source + " Message: " + e.Message);
+                    System.Diagnostics.Debug.WriteLine("RegionPinger.RegionPingThreaded() caught an exception for ping.StartPing(). Exception: " + e + " Source: " + e.Source + " Message: " + e.Message);
                     break;
                 }
 
@@ -499,41 +499,36 @@ namespace Photon.Realtime
 
 
                 sw.Stop();
-                int rtt = this.ping.Successful ? (int)sw.ElapsedMilliseconds : MaxMilliseconsPerPing;   // if the reply didn't match the sent ping
+                int rtt = (int)sw.ElapsedMilliseconds;
                 this.rttResults.Add(rtt);
 
-                rttSum += rtt;
-                replyCount++;
-                this.region.Ping = (int)((rttSum) / replyCount);
+                if (IgnoreInitialAttempt && this.CurrentAttempt == 0)
+                {
+                    // do nothing.
+                }
+                else if (this.ping.Successful && !overtime)
+                {
+                    rttSum += rtt;
+                    replyCount++;
+                    this.region.Ping = (int)((rttSum) / replyCount);
+                }
 
                 #if !NETFX_CORE
-                int i = 4;
-                while (!this.ping.Done() && i > 0)
-                {
-                    i--;
-                    System.Threading.Thread.Sleep(100);
-                }
                 System.Threading.Thread.Sleep(10);
                 #endif
             }
-
 
             //Debug.Log("Done: "+ this.region.Code);
             this.Done = true;
             this.ping.Dispose();
 
-            int bestRtt = this.rttResults.Min();
-            int worstRtt = this.rttResults.Max();
-            int weighedRttSum = rttSum - worstRtt + bestRtt;
-            this.region.Ping = (int)(weighedRttSum / replyCount);   // now, we can create a weighted ping value
-    
             this.onDoneCall(this.region);
+
             return false;
         }
 
 
         #if SUPPORTED_UNITY
-
         /// <remarks>
         /// Affected by frame-rate of app, as this Coroutine checks the socket for a result once per frame.
         /// </remarks>
@@ -541,7 +536,7 @@ namespace Photon.Realtime
         {
             this.region.Ping = PingWhenFailed;
 
-            int rttSum = 0;
+            float rttSum = 0.0f;
             int replyCount = 0;
 
 
@@ -558,7 +553,7 @@ namespace Photon.Realtime
                 }
                 catch (Exception e)
                 {
-                    Debug.Log("RegionPinger.RegionPingCoroutine() caught exception for ping.StartPing(). Exception: " + e + " Source: " + e.Source + " Message: " + e.Message);
+                    Debug.Log("Caught: " + e);
                     break;
                 }
 
@@ -571,24 +566,24 @@ namespace Photon.Realtime
                         break;
                     }
 
-                    yield return new WaitForSecondsRealtime(0.01f); // keep this loop tight, to avoid adding local lag to rtt.
+                    yield return new WaitForSecondsRealtime(0.05f); // keep this loop tight, to avoid adding local lag to rtt.
                 }
 
 
                 sw.Stop();
-                int rtt = this.ping.Successful ? (int)sw.ElapsedMilliseconds : MaxMilliseconsPerPing; // if the reply didn't match the sent ping
+                int rtt = (int)sw.ElapsedMilliseconds;
                 this.rttResults.Add(rtt);
 
 
-                rttSum += rtt;
-                replyCount++;
-                this.region.Ping = (int)((rttSum) / replyCount);
-
-                int i = 4;
-                while (!this.ping.Done() && i > 0)
+                if (IgnoreInitialAttempt && this.CurrentAttempt == 0)
                 {
-                    i--;
-                    yield return new WaitForSeconds(0.1f);
+                    // do nothing.
+                }
+                else if (this.ping.Successful && !overtime)
+                {
+                    rttSum += rtt;
+                    replyCount++;
+                    this.region.Ping = (int)((rttSum) / replyCount);
                 }
 
                 yield return new WaitForSeconds(0.1f);
@@ -598,16 +593,10 @@ namespace Photon.Realtime
             //Debug.Log("Done: "+ this.region.Code);
             this.Done = true;
             this.ping.Dispose();
-            int bestRtt = this.rttResults.Min();
-            int worstRtt = this.rttResults.Max();
-            int weighedRttSum = rttSum - worstRtt + bestRtt;
-            this.region.Ping = (int)(weighedRttSum / replyCount); // now, we can create a weighted ping value
             this.onDoneCall(this.region);
             yield return null;
         }
-
         #endif
-
 
 
         public string GetResults()

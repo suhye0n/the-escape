@@ -33,8 +33,8 @@ namespace Photon.Realtime
     #endif
 
     #if UNITY_WEBGL
-    // import UnityWebRequest
-    using UnityEngine.Networking;
+    // import WWW class
+    using UnityEngine;
     #endif
 
     /// <summary>
@@ -449,15 +449,14 @@ namespace Photon.Realtime
     #if UNITY_WEBGL
     public class PingHttp : PhotonPing
     {
-        private UnityWebRequest webRequest;
+        private WWW webRequest;
 
         public override bool StartPing(string address)
         {
             base.Init();
 
             address = "https://" + address + "/photon/m/?ping&r=" + UnityEngine.Random.Range(0, 10000);
-            this.webRequest = UnityWebRequest.Get(address);
-            this.webRequest.SendWebRequest();
+            this.webRequest = new WWW(address);
             return true;
         }
 
