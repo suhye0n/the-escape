@@ -175,7 +175,7 @@ namespace ExitGames.Client.Photon
                     this.Listener.DebugReturn(DebugLevel.WARNING, "Proxy configuration via auto, pac or system is only supported with the WEBSOCKET_PROXYCONFIG define. Using no proxy instead.");
                     return true;
                 }
-                proxyUrl = proxyAddress;
+                res = proxyAddress;
             }
 
             return true;
