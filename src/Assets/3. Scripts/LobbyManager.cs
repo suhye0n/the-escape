@@ -8,7 +8,7 @@ using UnityEngine.UI;
 using UdpKit;
 using TMPro;
 
-public class LobbyManager : Photon.Bolt.GlobalEventListener
+public class LobbyManager : GlobalEventListener
 {
     public TextMeshPro LogText;
     public TMP_InputField SessionInput;
