@@ -3,6 +3,9 @@
 ### 시연 영상
 [![Video Label](http://img.youtube.com/vi/CoXYucQHY7w/0.jpg)](https://youtu.be/CoXYucQHY7w)
 
+### 데모 파일
+https://drive.google.com/file/d/1bOlyGEH6oY8DcYtoO_3VcoS2NDO0YJov/view?usp=sharing
+
 ### 개발 배경
 - 왼쪽 그래프는 이미지를 통해 학습했을 때 글이나, 대면 학습보다 기억력 지속시간이 뛰어남
 - 이미지를 통한 학습보다 시뮬레이션을 통한 학습이 2배 이상의 효과를 보임
