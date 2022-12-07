@@ -19,12 +19,20 @@
 ![image](https://user-images.githubusercontent.com/63187994/206101695-dccde787-fa71-4674-826c-f1d548c0a6f2.png)
 
 ### 사용한 오픈소스/asset
-- Unity Asset Store, “Props 3D”, https://assetstore.unity.com/packages/3d/props/props-3d-221035
+- 재난 맵: Unity Asset Store, “Apartment Kit”, https://assetstore.unity.com/packages/3d/environments/apartment-kit-124055
+- 파티클: Unity Asset Store, “Unity Particle Pack 5.x“, https://assetstore.unity.com/packages/essentials/asset-packs/unity-particle-pack-5-x-73777
+- 재난 3D 오브젝트: 케이디의 티스토리, "[유니티 3D 강좌] FPS 서바이벌 디펜스 - Part 1 기본 캐릭터 움직임", http://keidy.tistory.com/255
+- 서버: Photon Fusion, https://doc.photonengine.com/en-us/fusion/current/getting-started/sdk-download
+- 좀비: Unity Asset Store, ”Zombie“, https://assetstore.unity.com/packages/3d/characters/humanoids/zombie-30232
 - Unity Asset Store, “Photon Voice 2”, https://assetstore.unity.com/packages/tools/audio/photon-voice-2-130518
-- Unity Asset Store, “Photon Bolt FREE”,  https://assetstore.unity.com/packages/tools/network/photon-bolt-free-127156
-- Unity Asset Store, “Apartment Kit”, https://assetstore.unity.com/packages/3d/environments/apartment-kit-124055
-- Unity Asset Store, “Unity Particle Pack 5.x“, https://assetstore.unity.com/packages/essentials/asset-packs/unity-particle-pack-5-x-73777
-- 케이디의 티스토리, "[유니티 3D 강좌] FPS 서바이벌 디펜스 - Part 1 기본 캐릭터 움직임", http://keidy.tistory.com/255
+- 좀비 맵: Unity Asset Store, ”Flooded Grounds“, https://assetstore.unity.com/packages/3d/environments/flooded-grounds-48529
+- 총소리: Unity Asset Store, ”Free Sound Effects Pack“, https://assetstore.unity.com/packages/audio/sound-fx/free-sound-effects-pack-155776
+- 오브젝트 표시: Unity Asset Store, ”Hit VFX Mega Pack“, https://assetstore.unity.com/packages/vfx/particles/hit-vfx-mega-pack-224741
+- 쪽지 오브젝트: Unity Asset Store, “Props 3D”, https://assetstore.unity.com/packages/3d/props/props-3d-221035
+- 열쇠 오브젝트: Unity Asset Store, ”Key and Lock“, https://assetstore.unity.com/packages/3d/props/furniture/key-and-lock-193317
+- 플레이어: Unity Asset Store, ”Low Poly Soldiers Demo“, https://assetstore.unity.com/packages/3d/characters/low-poly-soldiers-demo-73611
+- 무기: Unity Asset Store, ”Low Poly Weapons VOL.1“, https://assetstore.unity.com/packages/3d/props/guns/low-poly-weapons-vol-1-151980
+- 기름: Unity Asset Store, ”Oil Cans“, https://assetstore.unity.com/packages/3d/props/oil-cans-841
 
 ### 해당 오픈소스의 버전
 2021.3.10f1
