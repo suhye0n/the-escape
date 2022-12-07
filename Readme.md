@@ -1,7 +1,7 @@
 # 1조 유니팀 <탈출>
 
 ### 시연 영상
-https://youtu.be/CoXYucQHY7w
+[![Video Label](http://img.youtube.com/vi/CoXYucQHY7w/0.jpg)](https://youtu.be/CoXYucQHY7w)
 
 ### 개발 배경
 - 왼쪽 그래프는 이미지를 통해 학습했을 때 글이나, 대면 학습보다 기억력 지속시간이 뛰어남
