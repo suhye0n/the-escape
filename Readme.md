@@ -2,6 +2,44 @@
 
 ### 시연 영상
 
+### 개발 배경
+- 왼쪽 그래프는 이미지를 통해 학습했을 때 글이나, 대면 학습보다 기억력 지속시간이 뛰어남
+- 이미지를 통한 학습보다 시뮬레이션을 통한 학습이 2배 이상의 효과를 보임
+- 기억에 더 오래 남을 수 있는 컨텐츠를 개발하기 위하여 학습 시뮬레이션이 가능한 컨텐츠를 개발하게 됨
+
+### 개발 필요성
+- 직접 게임을 플레이하며 화재 상황 대비 학습
+- 멀티 플레이를 통한 협동심 함양
+
+### 개발 최종 목표
+- 최종 목표: 실생활에서 활용 가능하며, 멀티 플레이가 가능한 탈출 게임 개발
+- 주요 기능: 타이머, 음성 채팅, 멀티, 공격, 아이템 사용, 장애물
+
+### 전체 시스템 구성도
+![image](https://user-images.githubusercontent.com/63187994/206101695-dccde787-fa71-4674-826c-f1d548c0a6f2.png)
+
 ### 사용한 오픈소스/asset
+- Unity Asset Store, “Props 3D”, https://assetstore.unity.com/packages/3d/props/props-3d-221035
+- Unity Asset Store, “Photon Voice 2”, https://assetstore.unity.com/packages/tools/audio/photon-voice-2-130518
+- Unity Asset Store, “Photon Bolt FREE”,  https://assetstore.unity.com/packages/tools/network/photon-bolt-free-127156
+- Unity Asset Store, “Apartment Kit”, https://assetstore.unity.com/packages/3d/environments/apartment-kit-124055
+- Unity Asset Store, “Unity Particle Pack 5.x“, https://assetstore.unity.com/packages/essentials/asset-packs/unity-particle-pack-5-x-73777
+- 케이디의 티스토리, "[유니티 3D 강좌] FPS 서바이벌 디펜스 - Part 1 기본 캐릭터 움직임", http://keidy.tistory.com/255
 
 ### 해당 오픈소스의 버전
+2021.3.10f1
+
+### 업무 분장
+- 서재용 - 재난 레벨 디자인, item 상호작용 구현
+- 김정찬 – 멀티플레이 구현, 상호작용 구현, 버튼 기능 구현
+- 김영호 - 플레이어 이동 구현 및 3D 모델 및 상호 작용
+- 김원렬 – 멀티플레이 구현, Player 이동, 적 공격, 통합 UI, 좀비 테마 UI, HP UI 구현
+- 박수현 – 멀티플레이 구현, 종료 UI, 팀보이스 구현, 힌트 기능 구현
+
+### 사용 설명서
+- W/A/S/D 및 방향키를 통한 게임 캐릭터 이동
+- Space 바를 통한 점프
+- ESC 버튼을 통한 게임 종료 UI 접근
+
+
+
